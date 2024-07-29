@@ -14,17 +14,18 @@ public class Main {
 
             } else if (storage.vectors.size() > 1) {
                 System.out.printf("At the moment, you have %d vectors stored.", storage.vectors.size());
-                System.out.printf("Your vectors: ", storage.vectors);
+                System.out.println("Your vectors: " + storage.vectors);
                 System.out.println("Do you want to compare them or see one of them? [c/s]");
                 String choice = scanner.nextLine();
 
-                if (choice == "c") {
+                if (choice.equals("c")) {
+                    // CONTINUE CODING HERE
                     continue;
-                } else if (choice == "s") {
+                } else if (choice.equals("s")) {
                     while (true) {
                         System.out.println("Which one?");
                         String vecChoice = scanner.nextLine();
-                        HashMap<String, Double> check = storage.getVec(vecChoice);
+                        HashMap<String, double[]> check = storage.getVec(vecChoice);
 
                         if (check != null) {
                             vec.useVec();
