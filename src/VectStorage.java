@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class VectStorage {
     Scanner scanner = new Scanner(System.in);
-    ArrayList<HashMap<String, double[]>> vectors = new ArrayList<>();
+    ArrayList<HashMap<String, Vect>> vectors = new ArrayList<>();
 
     public Vect createVec() {
         System.out.println();
@@ -21,7 +21,7 @@ public class VectStorage {
 
         if (cap > 1) {
             Vect vec = new Vect(name, cap);
-            HashMap<String, double[]> vecEntry = new HashMap<>();
+            HashMap<String, Vect> vecEntry = new HashMap<>();
 
             while (vec.getLastPos() != vec.getCapacity() - 1) {
                 System.out.println("Insert number:");
@@ -29,7 +29,7 @@ public class VectStorage {
                 vec.insert(num);
             }
 
-            vecEntry.put(vec.getName(), vec.getValues());
+            vecEntry.put(vec.getName(), vec);
             this.vectors.add(vecEntry);
 
             return vec;
@@ -39,12 +39,12 @@ public class VectStorage {
         }
     }
 
-    public ArrayList<HashMap<String, double[]>> displayVectors() {
+    public ArrayList<HashMap<String, Vect>> displayVectors() {
         return this.vectors;
     }
 
-    public HashMap<String, double[]> getVec(String name) {
-        for (HashMap<String, double[]> vecEntry : this.vectors) {
+    public HashMap<String, Vect> getVec(String name) {
+        for (HashMap<String, Vect> vecEntry : this.vectors) {
             if (vecEntry.containsKey(name)) {
                 return vecEntry;
             }
@@ -52,8 +52,8 @@ public class VectStorage {
         return null;
     }    
 
-    public boolean deleteVec(String name, HashMap<String, double[]> newVec) {
-        HashMap<String, double[]> vecEntry = getVec(name);
+    public boolean deleteVec(String name, HashMap<String, Vect> newVec) {
+        HashMap<String, Vect> vecEntry = this.getVec(name);
 
         if (vecEntry != null) {
             this.vectors.remove(vecEntry);
