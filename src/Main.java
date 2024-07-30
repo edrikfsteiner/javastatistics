@@ -25,10 +25,10 @@ public class Main {
                     while (true) {
                         System.out.println("Which one?");
                         String vecChoice = scanner.nextLine();
-                        HashMap<String, double[]> check = storage.getVec(vecChoice);
+                        HashMap<String, Vect> check = storage.getVec(vecChoice);
 
                         if (check != null) {
-                            vec.useVec();
+                            check.get("Vector").useVec();
                             break;
                         } else {
                             System.out.println("Vector was not found.");
