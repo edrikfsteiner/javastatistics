@@ -47,7 +47,6 @@ public class Vect {
             this.count += 1;
             this.lastPos += 1;
             this.values[lastPos] = value;
-            System.out.println(this.values[lastPos]);
         }
     }
 
@@ -203,113 +202,122 @@ public class Vect {
             System.out.println("Which do you choose?");
             int choice = scanner.nextInt();
 
-            if (choice == 1) {
-                this.displayVector();
+            switch (choice) {
+                case 1:
+                    this.displayVector();
+                    break;
 
-            } else if (choice == 2) {
-                while (true) {
-                    System.out.println("Which number to search?");
-                    double num = scanner.nextDouble();
-                    int position = this.binarySearch(num);
+                case 2:
+                    while (true) {
+                        System.out.println("Which number to search?");
+                        double num = scanner.nextDouble();
+                        int position = this.binarySearch(num);
 
-                    if (position == -1) {
-                        System.out.println("Number was not found");
-                    } else {
-                        System.out.printf("The number %d was found in position %d.%n", num, position);
+                        if (position == -1) {
+                            System.out.println("Number was not found");
+                        } else {
+                            System.out.printf("The number %d was found in position %d.%n", num, position);
+                        }
+
+                        System.out.println("Search another one? [y/n]");
+                        String answer = scanner.nextLine();
+
+                        if (answer.equals("n")) {
+                            break;
+                        }
                     }
+                    break;
 
-                    System.out.println("Search another one? [y/n]");
-                    String answer = scanner.nextLine();
+                case 3:
+                    while (true) {
+                        System.out.println("Which number to insert?");
+                        double num = scanner.nextDouble();
+                        this.insert(num);
 
-                    if (answer.equals("n")) {
-                        break;
+                        System.out.println("Insert another one? [y/n]");
+                        String answer = scanner.nextLine();
+
+                        if (answer.equals("n")) {
+                            break;
+                        }
                     }
-                }
+                    break;
 
-            } else if (choice == 3) {
-                while (true) {
-                    System.out.println("Which number to insert?");
-                    double num = scanner.nextDouble();
-                    this.insert(num);
+                case 4:
+                    while (true) {
+                        System.out.println("Which number to delete?");
+                        double num = scanner.nextDouble();
+                        int position = this.delete(num);
 
-                    System.out.println("Insert another one? [y/n]");
-                    String answer = scanner.nextLine();
+                        if (position == -1) {
+                            System.out.println("Number was not found");
+                        } else {
+                            System.out.printf("The number %d was deleted", num);
+                        }
 
-                    if (answer.equals("n")) {
-                        break;
+                        System.out.println("Delete another one? [y/n]");
+                        String answer = scanner.nextLine();
+
+                        if (answer.equals("n")) {
+                            break;
+                        }
                     }
-                }
+                    break;
 
-            } else if (choice == 4) {
-                while (true) {
-                    System.out.println("Which number to delete?");
-                    double num = scanner.nextDouble();
-                    int position = this.delete(num);
+                case 5:
+                    System.out.println(Arrays.stream(this.values).sum());
+                    break;
 
-                    if (position == -1) {
-                        System.out.println("Number was not found");
-                    } else {
-                        System.out.printf("The number %d was deleted", num);
-                    }
+                case 6:
+                    System.out.println(this.count);
+                    break;
+                    
+                case 7:
+                    System.out.println(this.mergeSort(this.values));
+                    break;
 
-                    System.out.println("Delete another one? [y/n]");
-                    String answer = scanner.nextLine();
+                case 8:
+                    System.out.println(this.aritMean());
+                    break;
 
-                    if (answer.equals("n")) {
-                        break;
-                    }
-                }
+                case 9:
+                    this.mergeSort(this.values);
+                    int median = this.values.length % 2;
+                    System.out.println(this.values[median]);
+                    break;
 
-            } else if (choice == 5) {
-                System.out.println(Arrays.stream(this.values).sum());
+                case 10:
+                    System.out.println(this.findMode(this.values));
+                    break;
 
-            } else if (choice == 6) {
-                System.out.println(this.count);
+                case 11:
+                    double max = Arrays.stream(this.values).max().orElseThrow();
+                    double min = Arrays.stream(this.values).min().orElseThrow();
+                    System.out.println(max - min);
+                    break;
 
-            } else if (choice == 7) {
-                System.out.println(this.mergeSort(this.values));
+                case 12:
+                    System.out.println(this.variance());
+                    break;
 
-            } else if (choice == 8) {
-                System.out.println(this.aritMean());
+                case 13:
+                    double mean_deviation = this.variance();
+                    break;
 
-            } else if (choice == 9) {
-                this.mergeSort(this.values);
-                int median = this.values.length % 2;
-                System.out.println(this.values[median]);
+                case 14:
+                    System.out.println(Math.sqrt(this.variance()));
+                    break;
 
-            } else if (choice == 10) {
-                System.out.println(this.findMode(this.values));
+                case 15:
+                    // CONTINUE CODING HERE
+                    return;
 
-            } else if (choice == 11) {
-                double max = Arrays.stream(this.values).max().orElseThrow();
-                double min = Arrays.stream(this.values).min().orElseThrow();
-                System.out.println(max - min);
+                case 16:
+                    return;
 
-            } else if (choice == 12) {
-                System.out.println(this.variance());
-
-            } else if (choice == 13) {
-                double mean_deviation = this.variance();
-
-                if (mean_deviation < 0) {
-                    System.out.println(mean_deviation * -1.0);
-                } else {
-                    System.out.println(mean_deviation);
-                }
-
-            } else if (choice == 14) {
-                System.out.println(Math.sqrt(this.variance()));
-
-            } else if (choice == 15) {
-                // CONTINUE CODING HERE
-                continue;
-
-            } else if (choice == 16) {
-                break;
-
-            } else {
-                System.out.println("You didn't select any of the menu numbers. Please repeat.");
-                continue;
+                default:
+                    System.out.println("You didn't select any of the menu numbers. Please repeat.");
+                    break;
             }
         }
     }
