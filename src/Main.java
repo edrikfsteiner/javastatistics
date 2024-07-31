@@ -8,36 +8,41 @@ public class Main {
         
         while (true) {
             Vect vec = storage.createVec();
+            int vectorSize = storage.getVectors().size();
 
-            if (storage.vectors.size() == 1) {
+            if (vectorSize == 1) {
                 vec.useVec();
 
-            } else if (storage.vectors.size() > 1) {
-                System.out.printf("At the moment, you have %d vectors stored.", storage.vectors.size());
-                System.out.println("Your vectors: " + storage.vectors);
+            } else if (vectorSize > 1) {
+                System.out.printf("At the moment, you have %d vectors stored.", vectorSize);
+                System.out.println("Your vectors: " + storage.getVectors());
                 System.out.println("Do you want to compare them or see one of them? [c/s]");
                 String choice = scanner.nextLine();
 
-                if (choice.equals("c")) {
-                    // CONTINUE CODING HERE
-                    continue;
-                } else if (choice.equals("s")) {
-                    while (true) {
-                        System.out.println("Which one?");
-                        String vecChoice = scanner.nextLine();
-                        HashMap<String, Vect> check = storage.getVec(vecChoice);
+                switch (choice) {
+                    case "c":
+                        // CONTINUE CODING HERE
+                        break;
 
-                        if (check != null) {
-                            check.get("Vector").useVec();
-                            break;
-                        } else {
-                            System.out.println("Vector was not found.");
-                            break;
+                    case "s":
+                        while (true) {
+                            System.out.println("Which one?");
+                            String vecChoice = scanner.nextLine();
+                            HashMap<String, Vect> check = storage.getVec(vecChoice);
+
+                            if (check != null) {
+                                check.get("Vector").useVec();
+                                break;
+                            } else {
+                                System.out.println("Vector was not found.");
+                                break;
+                            }
                         }
-                    }
-                } else {
-                    System.out.println("You didn't select any options given.");
-                    continue;
+                        break;
+                    
+                    default:
+                        System.out.println("You didn't select any options given.");
+                        break;
                 }
             }
         }
