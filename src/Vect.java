@@ -55,7 +55,7 @@ public class Vect {
             System.out.println("Empty vector");
         } else {
             for (int i = 0; i < lastPos + 1; i++) {
-                System.out.println(i + '-' + this.values[i]);
+                System.out.println(i + " - " + this.values[i]);
             }
         }
     }
@@ -203,11 +203,11 @@ public class Vect {
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
+                case 1: // Display vector
                     this.displayVector();
                     break;
 
-                case 2:
+                case 2: // Search element
                     while (true) {
                         System.out.println("Which number to search?");
                         double num = scanner.nextDouble();
@@ -228,7 +228,7 @@ public class Vect {
                     }
                     break;
 
-                case 3:
+                case 3: // Insert element
                     while (true) {
                         System.out.println("Which number to insert?");
                         double num = scanner.nextDouble();
@@ -243,7 +243,7 @@ public class Vect {
                     }
                     break;
 
-                case 4:
+                case 4: // Delete element
                     while (true) {
                         System.out.println("Which number to delete?");
                         double num = scanner.nextDouble();
@@ -264,55 +264,61 @@ public class Vect {
                     }
                     break;
 
-                case 5:
+                case 5: // Sum of the elements
                     System.out.println(Arrays.stream(this.values).sum());
                     break;
 
-                case 6:
+                case 6: // Quantity of elements
                     System.out.println(this.count);
                     break;
                     
-                case 7:
+                case 7: // Sort vector
                     System.out.println(this.mergeSort(this.values));
                     break;
 
-                case 8:
+                case 8: // Arithmetic mean
                     System.out.println(this.aritMean());
                     break;
 
-                case 9:
+                case 9: // Median
                     this.mergeSort(this.values);
                     int median = this.values.length % 2;
                     System.out.println(this.values[median]);
                     break;
 
-                case 10:
+                case 10: // Mode
                     System.out.println(this.findMode(this.values));
                     break;
 
-                case 11:
+                case 11: // Amplitude
                     double max = Arrays.stream(this.values).max().orElseThrow();
                     double min = Arrays.stream(this.values).min().orElseThrow();
                     System.out.println(max - min);
                     break;
 
-                case 12:
+                case 12: // Variance
                     System.out.println(this.variance());
                     break;
 
-                case 13:
+                case 13: // Mean deviation
                     double mean_deviation = this.variance();
+
+                    if (mean_deviation < 0) {
+                        System.out.println(mean_deviation * -1);
+                    } else {
+                        System.out.println(mean_deviation);
+                    }
                     break;
 
-                case 14:
+                case 14: // Standard deviation
                     System.out.println(Math.sqrt(this.variance()));
                     break;
 
-                case 15:
+                case 15: // Delete vector
                     // CONTINUE CODING HERE
                     return;
 
-                case 16:
+                case 16: // Add another vector
                     return;
 
                 default:
