@@ -4,7 +4,15 @@ import java.util.Scanner;
 
 public class VectStorage {
     Scanner scanner = new Scanner(System.in);
-    ArrayList<HashMap<String, Vect>> vectors = new ArrayList<>();
+    private ArrayList<HashMap<String, Vect>> vectors;
+
+    public VectStorage() {
+        this.vectors = new ArrayList<>();
+    }
+
+    public ArrayList<HashMap<String, Vect>> getVectors() {
+        return this.vectors;
+    }
 
     public Vect createVec() {
         System.out.println();
@@ -14,7 +22,7 @@ public class VectStorage {
             System.out.println("You can do numerous things with it later, but first;");
         }
 
-        System.out.println("How will be its name?");
+        System.out.println("What will be its name?");
         String name = scanner.nextLine();
         System.out.println("How many numbers your vector will have?");
         int cap = scanner.nextInt();
@@ -37,10 +45,6 @@ public class VectStorage {
             System.out.println("Your vector must have at least 2 values.");
             return null;
         }
-    }
-
-    public ArrayList<HashMap<String, Vect>> displayVectors() {
-        return this.vectors;
     }
 
     public HashMap<String, Vect> getVec(String name) {
