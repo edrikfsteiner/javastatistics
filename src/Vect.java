@@ -40,23 +40,15 @@ public class Vect {
         return values;
     }
 
-    public void insert(double value) {
-        if (this.lastPos == this.capacity - 1) {
-            System.out.println("Full vector");
-        } else {
-            this.count += 1;
-            this.lastPos += 1;
-            this.values[lastPos] = value;
-        }
-    }
-
-    public void displayVector() {
+    public boolean displayVector() {
         if (this.lastPos == -1) {
-            System.out.println("Empty vector");
+            return false;
         } else {
             for (int i = 0; i < lastPos + 1; i++) {
                 System.out.println(i + " - " + this.values[i]);
             }
+
+            return true;
         }
     }
 
@@ -79,6 +71,17 @@ public class Vect {
                     supLim = currentPos - 1;
                 }
             }
+        }
+    }
+
+    public boolean insert(double value) {
+        if (this.lastPos == this.capacity - 1) {
+            return false;
+        } else {
+            this.count += 1;
+            this.lastPos += 1;
+            this.values[lastPos] = value;
+            return true;
         }
     }
 
@@ -204,7 +207,13 @@ public class Vect {
 
             switch (choice) {
                 case 1: // Display vector
-                    this.displayVector();
+                    boolean displayVector = this.displayVector();
+
+                    if (displayVector == false) {
+                        System.out.println("Empty vector.");
+                    } else {
+                        System.out.println(displayVector);
+                    }
                     break;
 
                 case 2: // Search element
@@ -214,7 +223,7 @@ public class Vect {
                         int position = this.binarySearch(num);
 
                         if (position == -1) {
-                            System.out.println("Number was not found");
+                            System.out.println("Number was not found.");
                         } else {
                             System.out.printf("The number %d was found in position %d.%n", num, position);
                         }
@@ -232,13 +241,20 @@ public class Vect {
                     while (true) {
                         System.out.println("Which number to insert?");
                         double num = scanner.nextDouble();
-                        this.insert(num);
-
-                        System.out.println("Insert another one? [y/n]");
-                        String answer = scanner.nextLine();
-
-                        if (answer.equals("n")) {
+                        scanner.nextLine();
+                        boolean insert = this.insert(num);
+                        
+                        if (insert == false) {
+                            System.out.println("Full vector, can't insert number.");
                             break;
+                        } else {
+                            System.out.printf("Number %d was inserted.", num);
+                            System.out.println("Insert another one? [y/n]");
+                            String answer = scanner.nextLine();
+    
+                            if (answer.equals("n")) {
+                                break;
+                            }
                         }
                     }
                     break;
@@ -247,10 +263,10 @@ public class Vect {
                     while (true) {
                         System.out.println("Which number to delete?");
                         double num = scanner.nextDouble();
-                        int position = this.delete(num);
+                        int delete = this.delete(num);
 
-                        if (position == -1) {
-                            System.out.println("Number was not found");
+                        if (delete == -1) {
+                            System.out.println("Number was not found.");
                         } else {
                             System.out.printf("The number %d was deleted", num);
                         }
