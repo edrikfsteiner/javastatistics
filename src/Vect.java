@@ -85,11 +85,11 @@ public class Vect {
         }
     }
 
-    public int delete(double value) {
+    public boolean delete(double value) {
         int position = this.binarySearch(value);
         
         if (position == -1) {
-            return -1;
+            return false;
         } else {
             for (int i = position; i < this.lastPos; i++) {
                 this.values[i] = this.values[i + 1];
@@ -97,7 +97,7 @@ public class Vect {
 
             this.count -= 1;
             this.lastPos -= 1;
-            return position;
+            return true;
         }
     }
 
@@ -220,12 +220,13 @@ public class Vect {
                     while (true) {
                         System.out.println("Which number to search?");
                         double num = scanner.nextDouble();
+                        scanner.nextLine();
                         int position = this.binarySearch(num);
 
                         if (position == -1) {
                             System.out.println("Number was not found.");
                         } else {
-                            System.out.printf("The number %d was found in position %d.%n", num, position);
+                            System.out.printf("The number %.2f was found in position %d.%n", num, position);
                         }
 
                         System.out.println("Search another one? [y/n]");
@@ -248,13 +249,14 @@ public class Vect {
                             System.out.println("Full vector, can't insert number.");
                             break;
                         } else {
-                            System.out.printf("Number %d was inserted.", num);
-                            System.out.println("Insert another one? [y/n]");
-                            String answer = scanner.nextLine();
-    
-                            if (answer.equals("n")) {
-                                break;
-                            }
+                            System.out.printf("Number %.2f was inserted.", num);
+                        }
+
+                        System.out.println("Insert another one? [y/n]");
+                        String answer = scanner.nextLine();
+
+                        if (answer.equals("n")) {
+                            break;
                         }
                     }
                     break;
@@ -263,12 +265,13 @@ public class Vect {
                     while (true) {
                         System.out.println("Which number to delete?");
                         double num = scanner.nextDouble();
-                        int delete = this.delete(num);
+                        scanner.nextLine();
+                        boolean delete = this.delete(num);
 
-                        if (delete == -1) {
+                        if (delete == false) {
                             System.out.println("Number was not found.");
                         } else {
-                            System.out.printf("The number %d was deleted", num);
+                            System.out.printf("The number %.2f was deleted", num);
                         }
 
                         System.out.println("Delete another one? [y/n]");
