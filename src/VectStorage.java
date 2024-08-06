@@ -28,7 +28,7 @@ public class VectStorage {
         int cap = scanner.nextInt();
 
         if (cap > 1) {
-            Vect vec = new Vect(name, cap);
+            Vect vec = new Vect(name, cap, this);
             HashMap<String, Vect> vecEntry = new HashMap<>();
 
             while (vec.getLastPos() != vec.getCapacity() - 1) {
