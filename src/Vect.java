@@ -11,13 +11,15 @@ public class Vect {
     private int count;
     private int lastPos;
     private double[] values;
+    private VectStorage storage;
 
-    public Vect(String name, int capacity) {
+    public Vect(String name, int capacity, VectStorage storage) {
         this.name = name;
         this.capacity = capacity;
         this.count = 0;
         this.lastPos = -1;
         this.values = new double[capacity];
+        this.storage = storage;
     }
 
     public String getName() {
@@ -38,6 +40,10 @@ public class Vect {
 
     public double[] getValues() {
         return values;
+    }
+
+    public VectStorage getStorage() {
+        return storage;
     }
 
     public boolean displayVector() {
@@ -249,7 +255,7 @@ public class Vect {
                             System.out.println("Full vector, can't insert number.");
                             break;
                         } else {
-                            System.out.printf("Number %.2f was inserted.", num);
+                            System.out.println("Number " + num + " was inserted.");
                         }
 
                         System.out.println("Insert another one? [y/n]");
@@ -271,7 +277,7 @@ public class Vect {
                         if (delete == false) {
                             System.out.println("Number was not found.");
                         } else {
-                            System.out.printf("The number %.2f was deleted", num);
+                            System.out.println("Number " + num + " was deleted.");
                         }
 
                         System.out.println("Delete another one? [y/n]");
@@ -292,7 +298,8 @@ public class Vect {
                     break;
                     
                 case 7: // Sort vector
-                    System.out.println(this.mergeSort(this.values));
+                    double[] sort_vec = this.mergeSort(this.values);
+                    System.out.println(Arrays.toString(sort_vec));
                     break;
 
                 case 8: // Arithmetic mean
@@ -334,7 +341,7 @@ public class Vect {
                     break;
 
                 case 15: // Delete vector
-                    // CONTINUE CODING HERE
+                    this.getStorage().deleteVec(this.name, null);
                     return;
 
                 case 16: // Add another vector
