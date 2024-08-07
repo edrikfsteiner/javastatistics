@@ -14,15 +14,14 @@ public class Main {
                 vec.useVec();
 
             } else if (vectorSize > 1) {
-                System.out.printf("At the moment, you have %d vectors stored.", vectorSize);
+                System.out.println("At the moment, you have " + vectorSize + " vectors stored.");
                 System.out.println("Your vectors: " + storage.getVectors());
-                System.out.println("Do you want to compare them or see one of them? [c/s]");
+                System.out.println("Do you want to add one more or see one of them? [a/s]");
                 String choice = scanner.nextLine();
 
                 switch (choice) {
-                    case "c":
-                        // CONTINUE CODING HERE
-                        break;
+                    case "a":
+                        continue;
 
                     case "s":
                         while (true) {
