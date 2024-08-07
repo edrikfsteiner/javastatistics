@@ -16,7 +16,7 @@ public class VectStorage {
 
     public Vect createVec() {
         System.out.println();
-        if (this.vectors.size() == 0) {
+        if (this.getVectors().size() == 0) {
             System.out.println("Hello there!");
             System.out.println("This program gives to you the ability to insert numbers that will be stored in a vector.");
             System.out.println("You can do numerous things with it later, but first;");
@@ -26,6 +26,7 @@ public class VectStorage {
         String name = scanner.nextLine();
         System.out.println("How many numbers your vector will have?");
         int cap = scanner.nextInt();
+        scanner.nextLine();
 
         if (cap > 1) {
             Vect vec = new Vect(name, cap, this);
@@ -38,7 +39,7 @@ public class VectStorage {
             }
 
             vecEntry.put(vec.getName(), vec);
-            this.vectors.add(vecEntry);
+            this.getVectors().add(vecEntry);
 
             return vec;
         } else {
@@ -48,19 +49,37 @@ public class VectStorage {
     }
 
     public HashMap<String, Vect> getVec(String name) {
-        for (HashMap<String, Vect> vecEntry : this.vectors) {
+        for (HashMap<String, Vect> vecEntry : this.getVectors()) {
             if (vecEntry.containsKey(name)) {
                 return vecEntry;
             }
         }
         return null;
-    }    
+    }
+
+    public boolean renameVec(String name, String newName) {
+        HashMap<String, Vect> vecEntry = this.getVec(name);
+
+        if (vecEntry != null) {
+            Vect vec = vecEntry.remove(name);
+            
+            if (vec != null) {
+                vec.setName(newName);
+                HashMap<String, Vect> newVecEntry = new HashMap<>();
+                newVecEntry.put(newName, vec);
+                this.vectors.add(newVecEntry);
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public boolean deleteVec(String name, HashMap<String, Vect> newVec) {
         HashMap<String, Vect> vecEntry = this.getVec(name);
 
         if (vecEntry != null) {
-            this.vectors.remove(vecEntry);
+            this.getVectors().remove(vecEntry);
             return true;
         }
 
