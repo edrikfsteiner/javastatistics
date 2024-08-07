@@ -26,6 +26,10 @@ public class Vect {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -221,8 +225,13 @@ public class Vect {
                         System.out.println(displayVector);
                     }
                     break;
-
-                case 2: // Search element
+                
+                case 2:
+                    System.out.println("New name for the vector:");
+                    String newName = scanner.nextLine();
+                    this.storage.renameVec(getName(), newName);
+                
+                case 3: // Search element
                     while (true) {
                         System.out.println("Which number to search?");
                         double num = scanner.nextDouble();
@@ -244,7 +253,7 @@ public class Vect {
                     }
                     break;
 
-                case 3: // Insert element
+                case 4: // Insert element
                     while (true) {
                         System.out.println("Which number to insert?");
                         double num = scanner.nextDouble();
@@ -267,7 +276,7 @@ public class Vect {
                     }
                     break;
 
-                case 4: // Delete element
+                case 5: // Delete element
                     while (true) {
                         System.out.println("Which number to delete?");
                         double num = scanner.nextDouble();
@@ -289,44 +298,44 @@ public class Vect {
                     }
                     break;
 
-                case 5: // Sum of the elements
+                case 6: // Sum of the elements
                     System.out.println(Arrays.stream(this.values).sum());
                     break;
 
-                case 6: // Quantity of elements
+                case 7: // Quantity of elements
                     System.out.println(this.count);
                     break;
                     
-                case 7: // Sort vector
+                case 8: // Sort vector
                     double[] sort_vec = this.mergeSort(this.values);
                     System.out.println(Arrays.toString(sort_vec));
                     break;
 
-                case 8: // Arithmetic mean
+                case 9: // Arithmetic mean
                     System.out.println(this.aritMean());
                     break;
 
-                case 9: // Median
+                case 10: // Median
                     this.mergeSort(this.values);
                     int median = this.values.length % 2;
                     System.out.println(this.values[median]);
                     break;
 
-                case 10: // Mode
+                case 11: // Mode
                     System.out.println(this.findMode(this.values));
                     break;
 
-                case 11: // Amplitude
+                case 12: // Amplitude
                     double max = Arrays.stream(this.values).max().orElseThrow();
                     double min = Arrays.stream(this.values).min().orElseThrow();
                     System.out.println(max - min);
                     break;
 
-                case 12: // Variance
+                case 13: // Variance
                     System.out.println(this.variance());
                     break;
 
-                case 13: // Mean deviation
+                case 14: // Mean deviation
                     double mean_deviation = this.variance();
 
                     if (mean_deviation < 0) {
@@ -336,15 +345,15 @@ public class Vect {
                     }
                     break;
 
-                case 14: // Standard deviation
+                case 15: // Standard deviation
                     System.out.println(Math.sqrt(this.variance()));
                     break;
 
-                case 15: // Delete vector
+                case 16: // Delete vector
                     this.getStorage().deleteVec(this.name, null);
                     return;
 
-                case 16: // Add another vector
+                case 17: // Add another vector
                     return;
 
                 default:
