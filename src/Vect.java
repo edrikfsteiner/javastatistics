@@ -26,10 +26,6 @@ public class Vect {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getCapacity() {
         return capacity;
     }
@@ -51,11 +47,11 @@ public class Vect {
     }
 
     public boolean displayVector() {
-        if (this.lastPos == -1) {
+        if (this.getLastPos() == -1) {
             return false;
         } else {
-            for (int i = 0; i < lastPos + 1; i++) {
-                System.out.println(i + " - " + this.values[i]);
+            for (int i = 0; i < this.getLastPos() + 1; i++) {
+                System.out.println(i + " - " + this.getValues()[i]);
             }
 
             return true;
@@ -63,9 +59,9 @@ public class Vect {
     }
 
     public int binarySearch(double value) {
-        double[] arr = this.mergeSort(this.values);
+        double[] arr = this.mergeSort(this.getValues());
         int infLim = 0;
-        int supLim = this.lastPos;
+        int supLim = this.getLastPos();
 
         while (true) {
             int currentPos = (infLim + supLim) / 2;
@@ -85,12 +81,12 @@ public class Vect {
     }
 
     public boolean insert(double value) {
-        if (this.lastPos == this.capacity - 1) {
+        if (this.getLastPos() == this.getCapacity() - 1) {
             return false;
         } else {
-            this.count += 1;
-            this.lastPos += 1;
-            this.values[lastPos] = value;
+            this.count++;
+            this.lastPos++;
+            this.getValues()[this.getLastPos()] = value;
             return true;
         }
     }
@@ -101,12 +97,12 @@ public class Vect {
         if (position == -1) {
             return false;
         } else {
-            for (int i = position; i < this.lastPos; i++) {
-                this.values[i] = this.values[i + 1];
+            for (int i = position; i < this.getLastPos(); i++) {
+                this.getValues()[i] = this.getValues()[i + 1];
             }
 
-            this.count -= 1;
-            this.lastPos -= 1;
+            this.count--;
+            this.lastPos--;
             return true;
         }
     }
@@ -126,25 +122,25 @@ public class Vect {
             while (i < left.length && j < right.length) {
                 if (left[i] < right[j]) {
                     arr[k] = left[i];
-                    i += 1;
+                    i++;
                 } else {
                     arr[k] = right[j];
-                    j += 1;
+                    j++;
                 }
                 
-                k += 1;
+                k++;
             }
 
             while (i < left.length) {
                 arr[k] = left[i];
-                i += 1;
-                k += 1;
+                i++;
+                k++;
             }
 
             while (j < right.length) {
                 arr[k] = right[j];
-                j += 1;
-                k += 1;
+                j++;
+                k++;
             }
         }
 
@@ -152,7 +148,7 @@ public class Vect {
     }
 
     public double aritMean() {
-        double mean = Arrays.stream(this.values).sum() / this.count;
+        double mean = Arrays.stream(this.getValues()).sum() / this.getCount();
         return mean;
     }
 
@@ -177,14 +173,14 @@ public class Vect {
     }
 
     public double variance() {
-        double[] arr = new double[this.capacity];
+        double[] arr = new double[this.getCapacity()];
         double mean = this.aritMean();
 
-        for (int i = 0; i <= this.lastPos; i++) {
-            arr[i] = Math.pow((this.values[i] - mean), 2);
+        for (int i = 0; i <= this.getLastPos(); i++) {
+            arr[i] = Math.pow((this.getValues()[i] - mean), 2);
         }
 
-        double variance = Arrays.stream(arr).sum() / this.count;
+        double variance = Arrays.stream(arr).sum() / this.getCount();
         return variance;
     }
 
@@ -214,6 +210,7 @@ public class Vect {
 
             System.out.println("Which do you choose?");
             int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1: // Display vector
@@ -226,12 +223,7 @@ public class Vect {
                     }
                     break;
                 
-                case 2:
-                    System.out.println("New name for the vector:");
-                    String newName = scanner.nextLine();
-                    this.storage.renameVec(getName(), newName);
-                
-                case 3: // Search element
+                case 2: // Search element
                     while (true) {
                         System.out.println("Which number to search?");
                         double num = scanner.nextDouble();
@@ -253,7 +245,7 @@ public class Vect {
                     }
                     break;
 
-                case 4: // Insert element
+                case 3: // Insert element
                     while (true) {
                         System.out.println("Which number to insert?");
                         double num = scanner.nextDouble();
@@ -276,7 +268,7 @@ public class Vect {
                     }
                     break;
 
-                case 5: // Delete element
+                case 4: // Delete element
                     while (true) {
                         System.out.println("Which number to delete?");
                         double num = scanner.nextDouble();
@@ -298,44 +290,44 @@ public class Vect {
                     }
                     break;
 
-                case 6: // Sum of the elements
-                    System.out.println(Arrays.stream(this.values).sum());
+                case 5: // Sum of the elements
+                    System.out.println(Arrays.stream(this.getValues()).sum());
                     break;
 
-                case 7: // Quantity of elements
-                    System.out.println(this.count);
+                case 6: // Quantity of elements
+                    System.out.println(this.getCount());
                     break;
                     
-                case 8: // Sort vector
-                    double[] sort_vec = this.mergeSort(this.values);
+                case 7: // Sort vector
+                    double[] sort_vec = this.mergeSort(this.getValues());
                     System.out.println(Arrays.toString(sort_vec));
                     break;
 
-                case 9: // Arithmetic mean
+                case 8: // Arithmetic mean
                     System.out.println(this.aritMean());
                     break;
 
-                case 10: // Median
-                    this.mergeSort(this.values);
-                    int median = this.values.length % 2;
-                    System.out.println(this.values[median]);
+                case 9: // Median
+                    this.mergeSort(this.getValues());
+                    int median = this.getValues().length % 2;
+                    System.out.println(this.getValues()[median]);
                     break;
 
-                case 11: // Mode
-                    System.out.println(this.findMode(this.values));
+                case 10: // Mode
+                    System.out.println(this.findMode(this.getValues()));
                     break;
 
-                case 12: // Amplitude
-                    double max = Arrays.stream(this.values).max().orElseThrow();
-                    double min = Arrays.stream(this.values).min().orElseThrow();
+                case 11: // Amplitude
+                    double max = Arrays.stream(this.getValues()).max().orElseThrow();
+                    double min = Arrays.stream(this.getValues()).min().orElseThrow();
                     System.out.println(max - min);
                     break;
 
-                case 13: // Variance
+                case 12: // Variance
                     System.out.println(this.variance());
                     break;
 
-                case 14: // Mean deviation
+                case 13: // Mean deviation
                     double mean_deviation = this.variance();
 
                     if (mean_deviation < 0) {
@@ -345,15 +337,15 @@ public class Vect {
                     }
                     break;
 
-                case 15: // Standard deviation
+                case 14: // Standard deviation
                     System.out.println(Math.sqrt(this.variance()));
                     break;
 
-                case 16: // Delete vector
-                    this.getStorage().deleteVec(this.name, null);
+                case 15: // Delete vector
+                    this.getStorage().deleteVec(this.getName(), null);
                     return;
 
-                case 17: // Add another vector
+                case 16: // Add another vector
                     return;
 
                 default:
