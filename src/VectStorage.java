@@ -57,24 +57,6 @@ public class VectStorage {
         return null;
     }
 
-    public boolean renameVec(String name, String newName) {
-        HashMap<String, Vect> vecEntry = this.getVec(name);
-
-        if (vecEntry != null) {
-            Vect vec = vecEntry.remove(name);
-            
-            if (vec != null) {
-                vec.setName(newName);
-                HashMap<String, Vect> newVecEntry = new HashMap<>();
-                newVecEntry.put(newName, vec);
-                this.vectors.add(newVecEntry);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public boolean deleteVec(String name, HashMap<String, Vect> newVec) {
         HashMap<String, Vect> vecEntry = this.getVec(name);
 
