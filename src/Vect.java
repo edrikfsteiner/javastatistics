@@ -309,7 +309,7 @@ public class Vect {
 
                 case 9: // Median
                     this.mergeSort(this.getValues());
-                    int median = this.getValues().length % 2;
+                    int median = this.getValues().length / 2;
                     System.out.println(this.getValues()[median]);
                     break;
 
