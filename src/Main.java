@@ -8,41 +8,46 @@ public class Main {
         
         while (true) {
             Vect vec = storage.createVec();
-            int vectorSize = storage.getVectors().size();
 
-            if (vectorSize == 1) {
-                vec.useVec();
+            if (vec != null) {
+                int vectorSize = storage.getVectors().size();
 
-            } else if (vectorSize > 1) {
-                System.out.println("At the moment, you have " + vectorSize + " vectors stored.");
-                System.out.println("Your vectors: " + storage.getVectors());
-                System.out.println("Do you want to add one more or see one of them? [a/s]");
-                String choice = scanner.nextLine();
-
-                switch (choice) {
-                    case "a":
-                        continue;
-
-                    case "s":
-                        while (true) {
-                            System.out.println("Which one?");
-                            String vecChoice = scanner.nextLine();
-                            HashMap<String, Vect> check = storage.getVec(vecChoice);
-
-                            if (check != null) {
-                                check.get("Vector").useVec();
-                                break;
-                            } else {
-                                System.out.println("Vector was not found.");
-                                break;
+                if (vectorSize == 1) {
+                    vec.useVec();
+    
+                } else if (vectorSize > 1) {
+                    System.out.println("At the moment, you have " + vectorSize + " vectors stored.");
+                    System.out.println("Your vectors: " + storage.getVectors());
+                    System.out.println("Do you want to add one more or see one of them? [a/s]");
+                    String choice = scanner.nextLine();
+    
+                    switch (choice) {
+                        case "a":
+                            break;
+    
+                        case "s":
+                            while (true) {
+                                System.out.println("Which one?");
+                                String vecChoice = scanner.nextLine();
+                                HashMap<String, Vect> check = storage.getVec(vecChoice);
+    
+                                if (check != null) {
+                                    check.get("Vector").useVec();
+                                    break;
+                                } else {
+                                    System.out.println("Vector was not found.");
+                                    break;
+                                }
                             }
-                        }
-                        break;
-                    
-                    default:
-                        System.out.println("You didn't select any options given.");
-                        break;
-                }
+                            break;
+                        
+                        default:
+                            System.out.println("You didn't select any options given.");
+                            break;
+                    }
+                }          
+            } else {
+                System.out.println("Failed to create vector");
             }
         }
     }
